@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>This is a home page</h1>
+    <% if (locals.id) { %>
+        <p>http://localhost:8000/url/<%= id %>
+        </p>
+        <% } %>
+            <form method="post" action="/url">
+                <label for="url">Enter your original url</label><br>
+                <input type="text" name="url" placeholder="https://www.example.com" />
+                <button type="submit">Generate short url</button>
+            </form>
+            <br>
+            <% if (locals.docs) { %>
+                <table>
+                    <thead>
+                        <th>Index</th>
+                        <th>originalUrl</th>
+                        <th>ShortId</th>
+                        <th>clicks</th>
+                    </thead>
+
+                    <tbody>
+                        <% docs.forEach((doc,index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= index+1 %>
+                                </td>
+                                <td>
+                                    <%= doc.originalUrl %>
+                                </td>
+                                <td>
+                                    <%= doc.shortId %>
+                                </td>
+                                <td>
+                                    <%= doc.visitHistory.length %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+</body>
+
+</html>
